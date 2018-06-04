@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { TodoForm, TodoList } from "./components/todo/index";
-import { generateId } from "./lib/todoHelpers";
+import { generateId, addTodo } from "./lib/todoHelpers";
 
 class App extends Component {
   state = {
@@ -25,14 +25,14 @@ class App extends Component {
   handleSubmit = event => {
     event.preventDefault();
     if (this.state.currentTodo) {
-      const obj = {
+      const newTodo = {
         id: generateId(),
         name: this.state.currentTodo,
         isComplete: false
       };
-      this.state.todos.push(obj);
+      const addedTodo = addTodo(this.state.todos, newTodo)
       this.setState({
-        todos: this.state.todos,
+        todos: addedTodo,
         currentTodo: "",
         errorMessage: ""
       });
