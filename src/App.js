@@ -22,16 +22,29 @@ class App extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    let num = this.state.todos.length + 1;
-    const obj = {id: num, name: this.state.currentTodo, isComplete: false}
-    this.state.todos.push(obj)
-    this.setState({
-      todos: this.state.todos
-    });
+    if (this.state.currentTodo) {
+      let num = this.state.todos.length + 1;
+      const obj = { id: num, name: this.state.currentTodo, isComplete: false };
+      this.state.todos.push(obj);
+      this.setState({
+        todos: this.state.todos,
+        currentTodo: ""
+      });
+    }
   };
 
-  handleToggle = (id) => {
-    //console.log(id);
+  handleToggle = id => {
+    const todo = this.state.todos.find(x => x.id == id);
+    const toggled = todo;
+    toggled.isComplete = todo.isComplete ? false : true;
+
+    for (let i = 0; i < this.state.todos.length; i++) {
+      if (this.state.todos[i].id == id) {
+        this.state.todos[i] = toggled;
+        this.setState({ todos: this.state.todos });
+        break;
+      }
+    }
   };
 
   render() {
