@@ -21,7 +21,17 @@ class App extends Component {
   };
 
   handleSubmit = event => {
-    alert(1);
+    event.preventDefault();
+    let num = this.state.todos.length + 1;
+    const obj = {id: num, name: this.state.currentTodo, isComplete: false}
+    this.state.todos.push(obj)
+    this.setState({
+      todos: this.state.todos
+    });
+  };
+
+  handleToggle = (id) => {
+    //console.log(id);
   };
 
   render() {
@@ -39,7 +49,7 @@ class App extends Component {
           />
         </div>
         <div className="Todo-list">
-          <TodoList todos={this.state.todos}/>
+          <TodoList handleToggle={this.handleToggle} todos={this.state.todos} />
         </div>
       </div>
     );

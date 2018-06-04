@@ -1,8 +1,12 @@
 import React from "react";
 
 export const TodoItem = props => (
-  <div>
-    <input type="checkbox" defaultChecked={props.isComplete} />
+  <li>
+    <input
+      type="checkbox"
+      onChange={props.handleToggle(props.id)}
+      defaultChecked={props.isComplete}
+    />
     <span>{props.name}</span>
-  </div>
+  </li>
 );
