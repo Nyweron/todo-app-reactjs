@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 export const TodoItem = props => {
   return (
@@ -8,7 +9,13 @@ export const TodoItem = props => {
         onChange={props.handleToggle.bind(null, props.id)}
         defaultChecked={props.isComplete}
       />
-      <span>{props.name}</span>
+      {props.name}
     </li>
   );
 };
+
+TodoItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  isComplete: PropTypes.bool
+}
