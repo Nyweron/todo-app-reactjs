@@ -60,8 +60,7 @@ class App extends Component {
             currentTodo={this.currentTodo}
             handleSubmit={this.handleSubmit}
           />
-        </div>
-        <div className="Todo-list">
+
           <TodoList handleToggle={this.handleToggle} todos={this.state.todos} />
         </div>
       </div>
