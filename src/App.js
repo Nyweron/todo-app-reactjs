@@ -34,14 +34,14 @@ class App extends Component {
   };
 
   handleToggle = id => {
-    const todo = this.state.todos.find(x => x.id == id);
-    const toggled = todo;
-    toggled.isComplete = todo.isComplete ? false : true;
+    let listOfTodos = this.state.todos;
+    let todo = listOfTodos.find(x => x.id === id);
+    todo.isComplete = todo.isComplete ? false : true;
 
-    for (let i = 0; i < this.state.todos.length; i++) {
-      if (this.state.todos[i].id == id) {
-        this.state.todos[i] = toggled;
-        this.setState({ todos: this.state.todos });
+    for (let i = 0; i < listOfTodos.length; i++) {
+      if (listOfTodos[i].id === id) {
+        listOfTodos[i] = todo;
+        this.setState({ todos: listOfTodos });
         break;
       }
     }
