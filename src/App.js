@@ -57,8 +57,8 @@ class App extends Component {
 
   handleRemove = id => {
     let listOfTodos = this.state.todos;
-    const newList = removeTodoById(listOfTodos, id);
-    this.setState({ todos: newList });
+    const newListWithoutRemovedItem = removeTodoById(listOfTodos, id);
+    this.setState({ todos: newListWithoutRemovedItem });
   };
 
   handleCurrentPath = () => {
