@@ -3,19 +3,20 @@ import logo from "./logo.svg";
 import "./App.css";
 import { TodoForm, TodoList, TodoFilter } from "./components/todo/index";
 import { generateId, addTodo, findById, updateByObjectId, removeTodoById, filterTodos, getCurrentPath } from "./lib/todoHelpers";
+import { getAll } from "./lib/todoService";
 
 class App extends Component {
   state = {
-    todos: [
-      { id: 1, name: "test 1", isComplete: true },
-      { id: 2, name: "test 2", isComplete: false },
-      { id: 3, name: "test 3", isComplete: false }
-    ],
-
+    todos: [],
     currentTodo: "",
     errorMessage: "",
     currentRoute: ""
   };
+
+  componentDidMount() {
+    getAll()
+      .then(todos => this.setState({ todos }))
+  }
 
   handleInputChange = event => {
     event.preventDefault();
