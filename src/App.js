@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { TodoForm, TodoList } from "./components/todo/index";
-import { generateId, addTodo, findById, updateByObjectId } from "./lib/todoHelpers";
+import { generateId, addTodo, findById, updateByObjectId, removeTodoById } from "./lib/todoHelpers";
 
 class App extends Component {
   state = {
@@ -55,10 +55,13 @@ class App extends Component {
 
   handleRemove = id => {
     console.log("id:", id);
-
+    let listOfTodos = this.state.todos;
+    const newList = removeTodoById(listOfTodos, id);
+    this.setState({ todos: newList });
   };
 
   render() {
+
     const submitHandle = this.state.currentTodo
       ? this.handleSubmit
       : this.handleEmptySubmit;
