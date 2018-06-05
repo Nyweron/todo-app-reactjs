@@ -7,7 +7,7 @@ export const TodoList = props => {
     <div className="Todo-list">
       <ul>
         {props.todos.map(todo => (
-          <TodoItem key={todo.id} {...todo} handleToggle={props.handleToggle} />
+          <TodoItem key={todo.id} {...todo} handleToggle={props.handleToggle} handleRemove={props.handleRemove} />
         ))}
       </ul>
     </div>

@@ -58,6 +58,10 @@ class App extends Component {
     }
   };
 
+  handleRemove = id => {
+    console.log("id:", id)
+  }
+
   render() {
     const submitHandle = this.state.currentTodo
       ? this.handleSubmit
@@ -76,7 +80,7 @@ class App extends Component {
             handleSubmit={submitHandle}
           />
 
-          <TodoList handleToggle={this.handleToggle} todos={this.state.todos} />
+          <TodoList handleToggle={this.handleToggle} todos={this.state.todos} handleRemove={this.handleRemove}/>
         </div>
       </div>
     );
