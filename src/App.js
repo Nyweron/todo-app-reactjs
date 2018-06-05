@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { TodoForm, TodoList, TodoFilter } from "./components/todo/index";
-import { generateId, addTodo, findById, updateByObjectId, removeTodoById } from "./lib/todoHelpers";
+import { generateId, addTodo, findById, updateByObjectId, removeTodoById, filterTodos, getCurrentPath } from "./lib/todoHelpers";
 
 class App extends Component {
   state = {
@@ -11,8 +11,10 @@ class App extends Component {
       { id: 2, name: "test 2", isComplete: false },
       { id: 3, name: "test 3", isComplete: false }
     ],
+
     currentTodo: "",
-    errorMessage: ""
+    errorMessage: "",
+    currentRoute: ""
   };
 
   handleInputChange = event => {
@@ -54,17 +56,19 @@ class App extends Component {
   };
 
   handleRemove = id => {
-    console.log("id:", id);
     let listOfTodos = this.state.todos;
     const newList = removeTodoById(listOfTodos, id);
     this.setState({ todos: newList });
   };
 
-  render() {
+  handleCurrentPath = () => {
+    const currentPath = getCurrentPath();
+    this.setState({currentRoute: currentPath})
+  }
 
-    const submitHandle = this.state.currentTodo
-      ? this.handleSubmit
-      : this.handleEmptySubmit;
+  render() {
+    const submitHandle = this.state.currentTodo ? this.handleSubmit : this.handleEmptySubmit;
+    const SortTodos = filterTodos(this.state.todos, this.state.currentRoute);
     return (
       <div className="App">
         <header className="App-header">
@@ -81,11 +85,11 @@ class App extends Component {
             handleSubmit={submitHandle}
           />
 
-          <TodoFilter/>
+          <TodoFilter handleCurrentPath={this.handleCurrentPath}/>
 
           <TodoList
             handleToggle={this.handleToggle}
-            todos={this.state.todos}
+            todos={SortTodos}
             handleRemove={this.handleRemove}
           />
         </div>

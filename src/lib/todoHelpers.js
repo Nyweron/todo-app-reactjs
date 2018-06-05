@@ -15,3 +15,21 @@ export const removeTodoById = (list, id) => {
 
   return list;
 };
+
+export const filterTodos = (list, action) => {
+    switch(action){
+      case '/active':
+        return list.filter(x => !x.isComplete);
+      case '/complete':
+        return list.filter(x => x.isComplete);
+      default:
+        return list;
+    }
+}
+
+export const getCurrentPath = () => {
+  const path = document.location.pathname;
+  const route =  path.substring(path.lastIndexOf('/'));
+
+  return route;
+}

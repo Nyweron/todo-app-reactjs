@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
-export const TodoFilter = () => {
+export const TodoFilter = (props) => {
   return (
     <Router>
-      <div className="TodoFilter">
+      <div onClick={props.handleCurrentPath} className="TodoFilter">
         <Link to="/">All</Link> {" "}
-        <Link to="/Active">Active</Link>{" "}
-        <Link to="/Complete">Complete</Link>
+        <Link to="/active">Active</Link>{" "}
+        <Link to="/complete">Complete</Link>
       </div>
     </Router>
   );
