@@ -1,4 +1,4 @@
-import { addTodo, findById, removeTodoById } from "./todoHelpers";
+import { addTodo, findById, removeTodoById, filterTodos } from "./todoHelpers";
 
 test("addTodo should add and passed todo to the list", () => {
   const startTodos = [
@@ -59,5 +59,21 @@ test("removeTodoById should remove one element from array by id", () => {
   ];
 
   const result = removeTodoById(startTodos, id);
+  expect(result).toEqual(expected);
+});
+
+test("filterTodos should return active", () => {
+  const startTodos = [
+    { id: 1, name: "one", isComplete: true },
+    { id: 2, name: "two", isComplete: false },
+    { id: 3, name: "three", isComplete: false }
+  ];
+  const action = '/active';
+  const expected = [
+    { id: 2, name: "two", isComplete: false },
+    { id: 3, name: "three", isComplete: false }
+  ];
+
+  const result = filterTodos(startTodos, action);
   expect(result).toEqual(expected);
 });
