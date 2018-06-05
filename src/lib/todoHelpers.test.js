@@ -1,4 +1,4 @@
-import { addTodo, findById } from "./todoHelpers";
+import { addTodo, findById, removeTodoById } from "./todoHelpers";
 
 test("addTodo should add and passed todo to the list", () => {
   const startTodos = [
@@ -43,5 +43,21 @@ test("findById should find object by id from list", () => {
   const expected = { id: 1, name: "one", isComplete: false };
 
   const result = findById(startTodos, id);
+  expect(result).toEqual(expected);
+});
+
+test("removeTodoById should remove one element from array by id", () => {
+  const startTodos = [
+    { id: 1, name: "one", isComplete: false },
+    { id: 2, name: "two", isComplete: false },
+    { id: 3, name: "three", isComplete: false }
+  ];
+  const id = 2;
+  const expected = [
+    { id: 1, name: "one", isComplete: false },
+    { id: 3, name: "three", isComplete: false }
+  ];
+
+  const result = removeTodoById(startTodos, id);
   expect(result).toEqual(expected);
 });
