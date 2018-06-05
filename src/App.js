@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { TodoForm, TodoList } from "./components/todo/index";
-import { generateId, addTodo } from "./lib/todoHelpers";
+import { generateId, addTodo, findById, updateByObjectId } from "./lib/todoHelpers";
 
 class App extends Component {
   state = {
@@ -30,7 +30,7 @@ class App extends Component {
         name: this.state.currentTodo,
         isComplete: false
       };
-      const addedTodo = addTodo(this.state.todos, newTodo)
+      const addedTodo = addTodo(this.state.todos, newTodo);
       this.setState({
         todos: addedTodo,
         currentTodo: "",
@@ -46,21 +46,17 @@ class App extends Component {
 
   handleToggle = id => {
     let listOfTodos = this.state.todos;
-    let todo = listOfTodos.find(x => x.id === id);
+    let todo = findById(listOfTodos, id);
     todo.isComplete = todo.isComplete ? false : true;
 
-    for (let i = 0; i < listOfTodos.length; i++) {
-      if (listOfTodos[i].id === id) {
-        listOfTodos[i] = todo;
-        this.setState({ todos: listOfTodos });
-        break;
-      }
-    }
+    const newUpdatedTodosList = updateByObjectId(listOfTodos, todo);
+    this.setState({ todos: newUpdatedTodosList });
   };
 
   handleRemove = id => {
-    console.log("id:", id)
-  }
+    console.log("id:", id);
+
+  };
 
   render() {
     const submitHandle = this.state.currentTodo
@@ -73,14 +69,20 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <div className="Todo-App">
-        {this.state.errorMessage && <span className="error">{this.state.errorMessage}</span>}
+          {this.state.errorMessage && (
+            <span className="error">{this.state.errorMessage}</span>
+          )}
           <TodoForm
             handleInputChange={this.handleInputChange}
             currentTodo={this.state.currentTodo}
             handleSubmit={submitHandle}
           />
 
-          <TodoList handleToggle={this.handleToggle} todos={this.state.todos} handleRemove={this.handleRemove}/>
+          <TodoList
+            handleToggle={this.handleToggle}
+            todos={this.state.todos}
+            handleRemove={this.handleRemove}
+          />
         </div>
       </div>
     );
