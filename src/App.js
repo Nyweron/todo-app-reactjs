@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { TodoForm, TodoList, TodoFilter } from "./components/todo/index";
 import { generateId, addTodo, findById, updateByObjectId, removeTodoById, filterTodos, getCurrentPath } from "./lib/todoHelpers";
-import { getAll } from "./lib/todoService";
+import { getAll, createTodo } from "./lib/todoService";
 
 class App extends Component {
   state = {
@@ -39,6 +39,8 @@ class App extends Component {
         currentTodo: "",
         errorMessage: ""
       });
+
+      createTodo(newTodo);
     }
   };
 
