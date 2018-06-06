@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { TodoForm, TodoList, TodoFilter } from "./components/todo/index";
 import { generateId, addTodo, findById, updateByObjectId, removeTodoById, filterTodos, getCurrentPath } from "./lib/todoHelpers";
-import { getAll, createTodo, deleteTodo } from "./lib/todoService";
+import { getAll, createTodo, deleteTodo, updateTodo } from "./lib/todoService";
 
 class App extends Component {
   state = {
@@ -56,6 +56,7 @@ class App extends Component {
 
     const newUpdatedTodosList = updateByObjectId(listOfTodos, todo);
     this.setState({ todos: newUpdatedTodosList });
+    updateTodo(todo);
   };
 
   handleRemove = id => {

@@ -23,4 +23,15 @@ export const deleteTodo = id => {
       "Content-Type": "application/json"
     }
   });
+};
+
+export const updateTodo = todo => {
+  return fetch(`${baseUrl}/${todo.id}`, {
+    method: "PUT",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(todo)
+  }).then(res => res.json());
 }
