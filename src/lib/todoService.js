@@ -14,3 +14,13 @@ export const createTodo = todo => {
     body: JSON.stringify(todo)
   }).then(res => res.json());
 };
+
+export const deleteTodo = id => {
+  return fetch(`${baseUrl}/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    }
+  });
+}

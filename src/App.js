@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { TodoForm, TodoList, TodoFilter } from "./components/todo/index";
 import { generateId, addTodo, findById, updateByObjectId, removeTodoById, filterTodos, getCurrentPath } from "./lib/todoHelpers";
-import { getAll, createTodo } from "./lib/todoService";
+import { getAll, createTodo, deleteTodo } from "./lib/todoService";
 
 class App extends Component {
   state = {
@@ -62,6 +62,7 @@ class App extends Component {
     let listOfTodos = this.state.todos;
     const newListWithoutRemovedItem = removeTodoById(listOfTodos, id);
     this.setState({ todos: newListWithoutRemovedItem });
+    deleteTodo(id);
   };
 
   handleCurrentPath = () => {
