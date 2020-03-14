@@ -1,16 +1,21 @@
 {
   "name": "todo-my-app",
+  "homepage": "https://nyweron.github.io/todo-app-reactjs",
+  "author": "Przemysław Juśkiewicz",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "npm": "^6.1.0",
+    "gh-pages": "^2.2.0",
     "json-server": "^0.13.0",
+    "npm": "^6.1.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
